@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Mode Selector</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+      background: #111;
+      color: white;
+    }
+    button {
+      margin: 8px;
+      padding: 12px 18px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .mode { background: #444; color: white; }
+    .level { background: #666; color: white; }
+    .result {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Pilih Mode</h2>
+<button class="mode" onclick="setMode('Rank')">Rank</button>
+<button class="mode" onclick="setMode('Casual')">Casual</button>
+
+<h2>Level Hari Ini</h2>
+<button class="level" onclick="setLevel(1)">1 Santai banget</button>
+<button class="level" onclick="setLevel(2)">2 Santai</button>
+<button class="level" onclick="setLevel(3)">3 Normal</button>
+<button class="level" onclick="setLevel(4)">4 Sibuk</button>
+<button class="level" onclick="setLevel(5)">5 Padat banget</button>
+
+<h2>Atau</h2>
+<button onclick="langsungPeaceful()">Ga tau / Lagi kosong</button>
+
+<div class="result" id="hasil"></div>
+
+<script>
+let mode = null;
+let level = null;
+
+function setMode(m) {
+  mode = m;
+  update();
+}
+
+function setLevel(l) {
+  level = l;
+  update();
+}
+
+function langsungPeaceful() {
+  document.getElementById("hasil").innerText =
+    "Rekomendasi: Peaceful (1 task)";
+}
+
+function update() {
+  if (!mode || !level) return;
+
+  let result = "";
+
+  if (mode === "Rank") {
+    if (level == 1) result = "Easy";
+    if (level == 2) result = "Normal";
+    if (level == 3) result = "Normal";
+    if (level == 4) result = "Hard";
+    if (level == 5) result = "Insane";
+  }
+
+  if (mode === "Casual") {
+    if (level == 1) result = "Peaceful";
+    if (level == 2) result = "Easy";
+    if (level == 3) result = "Easy";
+    if (level == 4) result = "Normal";
+    if (level == 5) result = "Hard";
+  }
+
+  document.getElementById("hasil").innerText =
+    "Rekomendasi: " + result;
+}
+</script>
+
+</body>
+</html>

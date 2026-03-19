@@ -1,28 +1,33 @@
-<div id="step1" class="layer active">
-  <h2>Mode</h2>
-  <button onclick="nextStep(1,2)">Casual</button>
-  <button onclick="nextStep(1,2)">Rank</button>
-</div>
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial;
+  text-align: center;
+  margin-top: 100px;
+}
 
-<div id="step2" class="layer">
-  <h2>Mood</h2>
-  <button onclick="nextStep(2,3)">Awful</button>
-  <button onclick="nextStep(2,3)">Great</button>
-</div>
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-<div id="step3" class="layer">
-  <h2>Kondisi</h2>
-  <button onclick="nextStep(3,4)">Work</button>
-  <button onclick="nextStep(3,4)">Freetime</button>
-</div>
+button:hover {
+  background: #444;
+}
 
-<div id="step4" class="layer">
-  <h2>Aktivitas</h2>
-  <button onclick="nextStep(4,5)">Low</button>
-  <button onclick="nextStep(4,5)">High</button>
-</div>
+/* SYSTEM */
+.layer {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
 
-<div id="step5" class="layer">
-  <h2>Hasil</h2>
-  <p id="result"></p>
-</div>
+.layer.active {
+  display: block;
+  opacity: 1;
+}

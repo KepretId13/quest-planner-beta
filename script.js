@@ -7,6 +7,84 @@ const diffImage = {
   6: "crazy.png"
 };
 
+const reasonPool = {
+
+  mood_low: [
+    "Mood lu lagi ga stabil",
+    "Energi mental lagi turun",
+    "Hari ini bukan hari terbaik lu",
+    "Fokus lagi gampang pecah",
+    "Lu lagi butuh pace pelan",
+    "Kondisi mental lagi berat"
+  ],
+
+  mood_high: [
+    "Mood lu lagi bagus",
+    "Lu lagi on fire",
+    "Fokus lu lagi enak dipake",
+    "Energi lu lagi naik",
+    "Momentum lagi kebangun",
+    "Lu lagi siap nge-push"
+  ],
+
+  work: [
+    "Lagi mode kerja",
+    "Ada tanggung jawab yang harus jalan",
+    "Lu lagi di fase produktif",
+    "Ada target yang harus dicapai",
+    "Waktu lu lagi kepake serius",
+    "Ini bukan waktu buat santai total"
+  ],
+
+  chill: [
+    "Waktu lu lebih santai",
+    "Ga ada tekanan besar hari ini",
+    "Bisa ambil pace lebih slow",
+    "Lu punya ruang buat nafas",
+    "Hari ini ga terlalu padat",
+    "Bisa fleksibel dikit"
+  ],
+
+  high_act: [
+    "Beban aktivitas lagi tinggi",
+    "Banyak hal harus diselesaikan",
+    "Hari ini cukup padat",
+    "Tugas lagi numpuk",
+    "Pressure lagi naik",
+    "Lu lagi di kondisi sibuk"
+  ],
+
+  low_act: [
+    "Aktivitas lagi ringan",
+    "Ga banyak pressure hari ini",
+    "Bisa santai dikit",
+    "Tugas ga terlalu banyak",
+    "Hari ini relatif ringan",
+    "Masih ada ruang kosong"
+  ],
+
+  neutral: [
+    "Kondisi lu lagi stabil",
+    "Ga terlalu tinggi, ga terlalu rendah",
+    "Masih di titik balance",
+    "Cukup aman buat lanjut",
+    "Ga ada gangguan besar"
+  ],
+
+  closing: [
+    "Pelan juga tetap progress",
+    "Ga harus maksimal, yang penting jalan",
+    "Konsisten lebih penting dari perfect",
+    "Yang penting ga berhenti",
+    "Sedikit tapi lanjut itu menang",
+    "Jangan overpush diri sendiri"
+  ]
+};
+
+function pickRandom(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 let mode = 1;
 let mood = 2;
 let kondisi = 1;
@@ -83,4 +161,6 @@ function generate(){
 
   document.getElementById("weekly").innerText = "Weekly: " + result;
   document.getElementById("diffImage").src = diffImage[base];
+  document.getElementById("reason").innerText =
+  reasons.join(". ");
 }

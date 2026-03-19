@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Choices Engine</title>
+  <title>Quest Planner Engine</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -9,34 +9,38 @@
 
 <div id="step1" class="layer active">
   <h2>Mode</h2>
-  <button onclick="nextStep(1,2)">Casual</button>
-  <button onclick="nextStep(1,2)">Rank</button>
+  <button onclick="setMode(1); nextStep(1,2)">Casual</button>
+  <button onclick="setMode(2); nextStep(1,2)">Rank</button>
 </div>
 
 <div id="step2" class="layer">
   <h2>Mood</h2>
-  <button onclick="nextStep(2,3)">Awful</button>
-  <button onclick="nextStep(2,3)">Great</button>
+  <button onclick="setMood(1); nextStep(2,3)">Awful</button>
+  <button onclick="setMood(2); nextStep(2,3)">Neutral</button>
+  <button onclick="setMood(3); nextStep(2,3)">Great</button>
 </div>
 
 <div id="step3" class="layer">
   <h2>Kondisi</h2>
-  <button onclick="nextStep(3,4)">Work</button>
-  <button onclick="nextStep(3,4)">Freetime</button>
+  <button onclick="setKondisi(1); nextStep(3,4)">Work</button>
+  <button onclick="setKondisi(2); nextStep(3,4)">Freetime</button>
 </div>
 
 <div id="step4" class="layer">
   <h2>Aktivitas</h2>
-  <button onclick="nextStep(4,5)">Low</button>
-  <button onclick="nextStep(4,5)">High</button>
+  <button onclick="setAktivitas(1); nextStep(4,5)">Lowest</button>
+  <button onclick="setAktivitas(2); nextStep(4,5)">Low</button>
+  <button onclick="setAktivitas(3); nextStep(4,5)">Mid</button>
+  <button onclick="setAktivitas(4); nextStep(4,5)">High</button>
+  <button onclick="setAktivitas(5); nextStep(4,5)">Highest</button>
 </div>
 
 <div id="step5" class="layer">
   <h2>Hasil</h2>
-  <p id="result">Loading...</p>
+  <p id="daily"></p>
+  <p id="weekly"></p>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>

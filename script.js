@@ -1,3 +1,12 @@
+const diffImage = {
+  1: "peaceful.png",
+  2: "easy.png",
+  3: "normal.png",
+  4: "hard.png",
+  5: "insane.png",
+  6: "crazy.png"
+};
+
 let mode = 1;
 let mood = 2;
 let kondisi = 1;
@@ -72,6 +81,5 @@ function generate(){
 
   let result = weekly.map(x => diffName[x-1]).join(", ");
 
-  document.getElementById("weekly").innerText =
-    "Weekly: " + result;
+  document.getElementById("diffImage").src = diffImage[base];
 }

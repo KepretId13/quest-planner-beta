@@ -13,14 +13,8 @@ button {
   color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
 }
 
-button:hover {
-  background: #444;
-}
-
-/* SYSTEM */
 .layer {
   display: none;
   opacity: 0;

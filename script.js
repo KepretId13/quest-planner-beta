@@ -81,5 +81,6 @@ function generate(){
 
   let result = weekly.map(x => diffName[x-1]).join(", ");
 
+  document.getElementById("weekly").innerText = "Weekly: " + result;
   document.getElementById("diffImage").src = diffImage[base];
 }

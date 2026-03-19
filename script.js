@@ -133,6 +133,37 @@ function generate(){
   document.getElementById("daily").innerText = 
     "Daily: " + diffName[base-1];
 
+  let reasons = [];
+  
+    // mood
+  if(mood == 1){
+    reasons.push(pickRandom(reasonPool.mood_low));
+  }
+  if(mood == 2){
+    reasons.push(pickRandom(reasonPool.neutral));
+  }
+  if(mood == 3){
+    reasons.push(pickRandom(reasonPool.mood_high));
+  }
+
+  // kondisi
+  if(kondisi == 1){
+    reasons.push(pickRandom(reasonPool.work));
+  }
+  if(kondisi == 2){
+    reasons.push(pickRandom(reasonPool.chill));
+  }
+
+  // aktivitas
+  if(aktivitas >= 4){
+    reasons.push(pickRandom(reasonPool.high_act));
+  } else {
+    reasons.push(pickRandom(reasonPool.low_act));
+  }
+
+  // closing
+  reasons.push(pickRandom(reasonPool.closing));
+
   let weekly = [];
 
   for(let i=0;i<4;i++){

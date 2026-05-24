@@ -1,48 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Quest Planner Engine</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quest Planner Engine - Universe8</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div id="step1" class="layer active">
-  <h2>Mode</h2>
-  <button onclick="setMode(1); nextStep(1,2)">Casual</button>
-  <button onclick="setMode(2); nextStep(1,2)">Rank</button>
-</div>
+<div class="engine-container">
 
-<div id="step2" class="layer">
-  <h2>Mood</h2>
-  <button onclick="setMood(1); nextStep(2,3)">Awful</button>
-  <button onclick="setMood(2); nextStep(2,3)">Neutral</button>
-  <button onclick="setMood(3); nextStep(2,3)">Great</button>
-</div>
+  <div id="step1" class="layer active">
+    <div class="page-badge">01 / 10</div>
+    <h2>Pilih Ranah Permainan Lu</h2>
+    <p class="page-desc">Tentukan faksi manajemen energi lu untuk esok hari.</p>
+    <div class="btn-group-vertical">
+      <button onclick="setMode(1); nextStep(1,2)">🎒 Casual Edition (Bebas & Sederhana)</button>
+      <button onclick="setMode(2); nextStep(1,2)">⚔️ Rank Mode (Kaku & Mengikat)</button>
+    </div>
+  </div>
 
-<div id="step3" class="layer">
-  <h2>Kondisi</h2>
-  <button onclick="setKondisi(1); nextStep(3,4)">Work</button>
-  <button onclick="setKondisi(2); nextStep(3,4)">Freetime</button>
-</div>
+  <div id="step2" class="layer">
+    <div class="page-badge">02 / 10</div>
+    <h2>Kondisi Kestabilan Otak (Mood)</h2>
+    <p class="page-desc">Gimana sirkuit mood lu saat ini?</p>
+    <div class="btn-group-vertical">
+      <button onclick="setMood(1); nextStep(2,3)">⚠️ Awful (Drop/Berat)</button>
+      <button onclick="setMood(2); nextStep(2,3)">😐 Neutral (Stabil/Aman)</button>
+      <button onclick="setMood(3); nextStep(2,3)">🔥 Great (On Fire/Optimum)</button>
+    </div>
+  </div>
 
-<div id="step4" class="layer">
-  <h2>Aktivitas</h2>
-  <button onclick="setAktivitas(1); nextStep(4,5)">Lowest</button>
-  <button onclick="setAktivitas(2); nextStep(4,5)">Low</button>
-  <button onclick="setAktivitas(3); nextStep(4,5)">Mid</button>
-  <button onclick="setAktivitas(4); nextStep(4,5)">High</button>
-  <button onclick="setAktivitas(5); nextStep(4,5)">Highest</button>
-</div>
+  <div id="step3" class="layer">
+    <div class="page-badge">03 / 10</div>
+    <h2>Status Radar Fokus</h2>
+    <p class="page-desc">Deteksi kapasitas psikologis penyerapan tugas hari ini.</p>
+    <div class="btn-group-vertical">
+      <button onclick="setFokus(1); nextStep(3,4)">🧠 Locked In (Hyperfocus / Sangat Tajam)</button>
+      <button onclick="setFokus(2); nextStep(3,4)">🌀 Steady (Fokus Normal Terkendali)</button>
+      <button onclick="setFokus(3); nextStep(3,4)">🥀 Scatter (Fragmented / Gampang Pecah)</button>
+    </div>
+  </div>
 
-<div id="step5" class="layer">
-  <h2>Hasil</h2>
-  <h3 id="daily"></h3>
-  <img id="diffImage" style="width:150px; margin-top:10px;">
-  <p id="reason"></p>
-  <h3 id="weekly"></h3>
+  <div id="step4" class="layer">
+    <div class="page-badge">04 / 10</div>
+    <h2>Plot Waktu Esok Hari</h2>
+    <p class="page-desc">Lu bisa centang lebih dari satu opsi untuk mengukur range secara akurat.</p>
+    <div class="checkbox-group">
+      <label class="control-box"><input type="checkbox" name="condition" value="freetime" checked> Freetime (Luang/Santai)</label>
+      <label class="control-box"><input type="checkbox" name="condition" value="mid" checked> Mid (Menengah/Normal)</label>
+      <label class="control-box"><input type="checkbox" name="condition" value="work"> Work (Gawe/Sibuk)</label>
+    </div>
+    <button onclick="processConditionPage()" class="btn-next">Lanjutkan Langkah ➔</button>
+  </div>
+
+  <div id="step5" class="layer">
+    <div class="page-badge">05 / 10</div>
+    <h2>Volume Tanggungan Tugas Nyata</h2>
+    <p class="page-desc">Seberapa menumpuk draf urusan lu di realita saat ini?</p>
+    <div class="btn-group-vertical">
+      <button onclick="setAktivitas(1); nextStep(5,6)">Lowest (Kosong Melompong)</button>
+      <button onclick="setAktivitas(2); nextStep(5,6)">Low (Ringan)</button>
+      <button onclick="setAktivitas(3); nextStep(5,6)">Mid (Standar Sedang)</button>
+      <button onclick="setAktivitas(4); nextStep(5,6)">High (Cukup Padat)</button>
+      <button onclick="setAktivitas(5); nextStep(5,6)">Highest (Numpuk Parah)</button>
+    </div>
+  </div>
+
+  <div id="step6" class="layer">
+    <div class="page-badge">06 / 10</div>
+    <h2>Katup Urgensi Waktu</h2>
+    <p class="page-desc">Apakah ada aktivitas wajib atau deadline maut esok hari?</p>
+    <div class="btn-group-vertical">
+      <button onclick="setUrgensi(1); nextStep(6,7)">🟢 Gak Ada (Bisa Ditunda Bebas)</button>
+      <button onclick="setUrgensi(2); nextStep(6,7)">🟡 Normal (Ada tapi Santai)</button>
+      <button onclick="setUrgensi(3); nextStep(6,7)">🚨 Kritis (Wajib Kelar Besok!)</button>
+    </div>
+  </div>
+
+  <div id="step7" class="layer">
+    <div class="page-badge">07 / 10</div>
+    <h2>Filter Kompromi Dadu Skenario</h2>
+    <p class="page-desc">Uncheck skenario yang emang GAK mau lu mainin besok dari pool dadu.</p>
+    <div class="checkbox-group">
+      <label class="control-box"><input type="checkbox" name="scenario" value="classic" checked> Classic (Cupu/Format Standar)</label>
+      <label class="control-box"><input type="checkbox" name="scenario" value="advance" checked> Advance (Grind Terstruktur)</label>
+      <div id="rankOnlyScenarios">
+        <label class="control-box"><input type="checkbox" name="scenario" value="deaddrop" checked> Dead Drop (Taruhan Nyawa IRL)</label>
+      </div>
+      <label class="control-box"><input type="checkbox" name="scenario" value="experimental" checked> Experimental (Holiday/Co-Op Mode)</label>
+    </div>
+    <button onclick="processScenarioPage()" class="btn-next">Lanjutkan Langkah ➔</button>
+  </div>
+
+  <div id="step8" class="layer">
+    <div class="page-badge">08 / 10</div>
+    <h2>Faktor Pendukung Lingkungan</h2>
+    <p class="page-desc">Apakah sekitar lu besok kondusif untuk eksekusi target?</p>
+    <div class="btn-group-vertical">
+      <button onclick="setBuffer(1); checkBranchPage8()">🛑 Terganggu (Banyak Distraksi/Oleng)</button>
+      <button onclick="setBuffer(2); checkBranchPage8()">🍏 Kondusif (Aman & Tenang Buat Fokus)</button>
+    </div>
+  </div>
+
+  <div id="step9" class="layer">
+    <div class="page-badge">09 / 10</div>
+    <h2>Varian Modul Monthly di Tangan</h2>
+    <p class="page-desc">(Faksi Rank) Pilih tingkat kesulitan lembar bulanan yang lu pegang saat ini.</p>
+    <div class="btn-group-vertical">
+      <button onclick="setMonthly(1); nextStep(9,10)">Peaceful</button>
+      <button onclick="setMonthly(2); nextStep(9,10)">Easy</button>
+      <button onclick="setMonthly(3); nextStep(9,10)">Normal</button>
+      <button onclick="setMonthly(4); nextStep(9,10)">Hard</button>
+      <button onclick="setMonthly(5); nextStep(9,10)">Insane</button>
+      <button onclick="setMonthly(6); nextStep(9,10)">Crazy</button>
+    </div>
+  </div>
+
+  <div id="step10" class="layer">
+    <div class="page-badge">10 / 10</div>
+    <h2>Sumpah Integritas Pemakai</h2>
+    <p class="page-desc">Apakah input 10 gerbang di atas murni riil, atau cuma alibi males nyari celah aman?</p>
+    <div class="btn-group-vertical">
+      <button onclick="generateEngine()" style="background: #ff3333; border-color: #ff3333;">🔥 GUA JUJUR, LEMPAR DADU REALITA!</button>
+      <button onclick="resetEngine()" style="background: #222;">🔄 Ulangi Sensus Dari Awal</button>
+    </div>
+  </div>
+
+  <div id="resultLayer" class="layer">
+    <h2 id="modeAlert" class="alert-banner"></h2>
+    <div class="result-box">
+      <h1 id="dailyResult">Daily: Normal</h1>
+      <div class="img-wrapper">
+        <img id="diffImage" src="" alt="Difficulty Status">
+      </div>
+      <p id="reasonText"></p>
+      <div class="meta-status">
+        <span id="monthlyStatus"></span>
+      </div>
+      <h3 id="weeklyResult"></h3>
+    </div>
+    <div class="result-actions">
+      <button onclick="copyQuestLog()" class="btn-copy">📋 Copy Quest Log to Clipboard</button>
+      <button onclick="resetEngine()" class="btn-reset">🎲 Kocok Dadu Baru</button>
+    </div>
+  </div>
+
 </div>
 
 <script src="script.js"></script>
 </body>
-</html>
+  </html>
+  

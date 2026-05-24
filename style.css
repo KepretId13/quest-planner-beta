@@ -1,27 +1,196 @@
 body {
-  background: #0f0f0f;
-  color: white;
-  font-family: Arial;
-  text-align: center;
-  margin-top: 100px;
+  background: #090909;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  background: #222;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.engine-container {
+  width: 100%;
+  max-width: 500px;
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 12px;
+  padding: 35px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.7);
 }
 
 .layer {
   display: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .layer.active {
   display: block;
   opacity: 1;
+}
+
+.page-badge {
+  font-size: 0.85rem;
+  color: #ff3333;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.page-desc {
+  font-size: 0.95rem;
+  color: #777777;
+  margin: 0 0 25px 0;
+  line-height: 1.4;
+}
+
+/* Susunan Tombol Vertikal */
+.btn-group-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 14px 20px;
+  background: #161616;
+  color: #ffffff;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background: #222222;
+  border-color: #444444;
+}
+
+/* Checkbox Style */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.control-box {
+  display: flex;
+  align-items: center;
+  background: #161616;
+  padding: 14px;
+  border: 1px solid #282828;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 15px;
+  width: 18px;
+  height: 18px;
+  accent-color: #ff3333;
+  cursor: pointer;
+}
+
+.btn-next {
+  text-align: center !important;
+  background: #ff3333;
+  border-color: #ff3333;
+}
+
+.btn-next:hover {
+  background: #cc2222;
+}
+
+/* Tampilan Hasil */
+.alert-banner {
+  font-size: 0.9rem;
+  color: #ff3333;
+  border: 1px dashed #ff3333;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  background: rgba(255, 51, 51, 0.05);
+}
+
+.result-box {
+  background: #161616;
+  border: 1px solid #222222;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+#dailyResult {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #ffffff;
+}
+
+.img-wrapper {
+  margin: 15px 0;
+}
+
+#reasonText {
+  font-size: 0.9rem;
+  color: #aaaaaa;
+  line-height: 1.5;
+  margin: 15px 0;
+}
+
+.meta-status {
+  font-size: 0.85rem;
+  color: #555555;
+  font-weight: bold;
+}
+
+#weeklyResult {
+  font-size: 1.1rem;
+  color: #ff3333;
+  margin: 15px 0 0 0;
+}
+
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-copy {
+  text-align: center;
+  background: #222;
+  border-color: #333;
+}
+
+.btn-reset {
+  text-align: center;
+  background: #000;
+  border-color: #ff3333;
+  color: #ff3333;
+}
+
+.btn-reset:hover {
+  background: #ff3333;
+  color: #fff;
 }

@@ -1,3 +1,7 @@
+/* ==========================================================================
+   🎨 UNIVERSE8 DESIGN SYSTEM CORE STYLE - RESPONSIVE MOBILE & LAPTOP
+   ========================================================================== */
+
 body {
   background: #090909;
   color: #e0e0e0;
@@ -59,7 +63,7 @@ h2 {
   line-height: 1.4;
 }
 
-/* Susunan Tombol Vertikal */
+/* Susunan Tombol Kontrol Vertikal */
 .btn-group-vertical {
   display: flex;
   flex-direction: column;
@@ -85,7 +89,7 @@ button:hover {
   border-color: #444444;
 }
 
-/* Checkbox Style */
+/* Checkbox Multi-Select Layout */
 .checkbox-group {
   display: flex;
   flex-direction: column;
@@ -123,7 +127,7 @@ input[type="checkbox"] {
   background: #cc2222;
 }
 
-/* Tampilan Hasil */
+/* Banner Status & Rekapitulasi Output */
 .alert-banner {
   font-size: 0.9rem;
   color: #ff3333;
@@ -132,6 +136,7 @@ input[type="checkbox"] {
   border-radius: 6px;
   margin-bottom: 20px;
   background: rgba(255, 51, 51, 0.05);
+  text-align: center;
 }
 
 .result-box {
@@ -140,6 +145,7 @@ input[type="checkbox"] {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 #dailyResult {
@@ -148,23 +154,22 @@ input[type="checkbox"] {
   color: #ffffff;
 }
 
-/* Kunci wadah gambarnya biar gak luber keluar kontainer */
+/* FIXED AMANKAN UKURAN KARTU GAMBAR (RESPONSIF MOBIL) */
 .img-wrapper {
   margin: 20px auto;
-  max-width: 280px; /* Batas lebar maksimal gambar di HP */
-  width: 100%;       /* Biar ngikutin lebar layar secara fleksibel */
+  max-width: 250px; /* Batas lebar ideal kartu kesulitan di HP */
+  width: 100%;       /* Otomatis mengecil proporsional */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;  /* Amankan pinggiran gambar */
+  overflow: hidden;  
 }
 
-/* Paksa gambar kartu lu buat nyesuaiin wadahnya otomatis */
 #diffImage {
-  width: 100%;       /* Gambar otomatis menyusut sesuai wadah .img-wrapper */
-  height: auto;      /* Jaga rasio gambar biar gak gepeng */
-  border-radius: 8px;/* Bikin ujung kartu agak melengkung estetik */
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Kasih efek bayangan tipis */
+  width: 100%;       
+  height: auto;      
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
 }
 
 #reasonText {
@@ -208,4 +213,4 @@ input[type="checkbox"] {
 .btn-reset:hover {
   background: #ff3333;
   color: #fff;
-}
+  }

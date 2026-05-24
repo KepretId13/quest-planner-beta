@@ -128,43 +128,88 @@ function checkBranchPage8() {
 // ==========================================================================
 
 function generateEngine() {
-  // Amankan tampilan penutup gerbang 10
+  // 1. Sembunyikan Step 10
   document.getElementById("step10").classList.remove("active");
   document.getElementById("step10").style.display = "none";
 
   let base = aktivitas; 
+  let durability = 0; // Baseline awal Durability Tubuh
   let alertText = "";
   let reasons = [];
 
-  // 1. Evaluasi Bobot Plot Waktu (Rentang Akurat)
+  // ==========================================================================
+  // 📊 AREA HITUNGAN POIN DURABILITY (DEEP SENSUS)
+  // ==========================================================================
+  // Page 2: Mood
+  if (mood === 1) durability -= 15;
+  if (mood === 3) durability += 15;
+
+  // Page 3: Radar Fokus
+  if (fokus === 1) durability += 10;
+  if (fokus === 3) durability -= 20;
+
+  // Page 4: Plot Waktu Esok Hari
+  if (conditions.includes("freetime")) durability += 15;
+  if (conditions.includes("work")) durability -= 20;
+
+  // Page 5: Volume Beban Aktivitas
+  if (aktivitas == 1) durability += 15;
+  if (aktivitas == 2) durability += 5;
+  if (aktivitas == 4) durability -= 10;
+  if (aktivitas == 5) durability -= 25;
+
+  // Page 6: Katup Urgensi Deadline
+  if (urgensi === 1) durability += 10;
+  if (urgensi === 3) durability -= 25;
+
+  // Page 8: Buffer Lingkungan
+  if (buffer === 1) durability -= 10;
+  if (buffer === 2) durability += 5;
+
+  // 🚨 AMANKAN RENDER VISUAL DURABILITY DI AWAL (BIAR GAK CRASH)
+  const durabilityElement = document.getElementById("durabilityValue");
+  if (durabilityElement) {
+    if (durability >= 0) {
+      durabilityElement.innerText = `+${durability}% (Energi Surplus/Aman 🔋)`;
+      durabilityElement.style.color = "#00ff66"; // Hijau faksi aman
+    } else {
+      durabilityElement.innerText = `${durability}% (Baterai Tubuh Terkuras ⚠️)`;
+      durabilityElement.style.color = "#ff3333"; // Merah faksi kritis
+    }
+  }
+  
+  // Kunci data attribute buat clipboard nanti
+  document.getElementById("resultLayer").setAttribute("data-durability", (durability >= 0 ? "+" : "") + durability + "%");
+
+  // ==========================================================================
+  // 🎲 JALANKAN LOGIKA PERHITUNGAN BASE DIFFICULTY
+  // ==========================================================================
   if (conditions.includes("work") && !conditions.includes("freetime")) base += 1;
   if (conditions.includes("freetime") && !conditions.includes("work")) base -= 1;
   
-  // 2. Evaluasi Status Mental & Radar Fokus Psikologis
   if (mood === 1) base -= 1;
   if (mood === 3) base += 1;
   
   if (fokus === 1) base += 1; 
   if (fokus === 3) {
     base -= 1; 
-    scenarios = scenarios.filter(s => s !== "deaddrop"); // Proteksi: Buat sanksi Dead Drop otomatis gugur
+    // Proteksi: Buat sanksi Dead Drop otomatis gugur dari sirkuit jika scatter
+    scenarios = scenarios.filter(s => s !== "deaddrop"); 
   }
 
-  // 3. Evaluasi Katup Urgensi & Lingkungan
   if (urgensi === 3) base += 1; 
   if (urgensi === 1) base -= 1;
   if (buffer === 1) base -= 1;
 
-  // 4. KANDANGI DADU KOMPROMI (Murni mengambil skenario pilihan user)
+  // Dadu Kompromi Pool Skenario
+  if (scenarios.length === 0) scenarios.push("classic");
   const rolledScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
 
-  // FIXED SINKRONISASI MUTLAK: Teks banner atas terkunci total dengan hasil dadu skenario
   if (rolledScenario === "deaddrop" && mode === 2) {
     base += 1;
     alertText = "💀 SCENARIO: DEAD DROP PROTOCOL";
   } else if (rolledScenario === "experimental") {
     alertText = "🌴 SCENARIO: EXPERIMENTAL PROTOCOL";
-    // Proteksi Kombo Khusus Holiday Protocol
     if (conditions.includes("freetime") && !conditions.includes("work") && urgensi === 1) {
       base = 1; 
       alertText = "🌴 EXPERIMENTAL: HOLIDAY PROTOCOL (Full Refreshing)";
@@ -175,11 +220,10 @@ function generateEngine() {
     alertText = "🎒 SCENARIO: CLASSIC (URA FINALE)";
   }
 
-  // Mengunci batas presisi array difficulty (1-6)
   if (base < 1) base = 1;
   if (base > 6) base = 6;
 
-  // 5. VERIFIKASI SEKAT VERTIKAL LAPISAN
+  // Verifikasi Lapisan Sekat Vertikal
   let monthlyText = "Monthly Status: Bebas Tanpa Beban Target Paralel";
   
   if (mode === 2) {
@@ -198,24 +242,23 @@ function generateEngine() {
     }
   } else {
     if (urgensi === 3 && aktivitas >= 4) {
-      alertText += " | ⚡ CASUAL URGENSI (Sederhana tapi On-Point)";
+      alertText += " | ⚡ CASUAL URGENSI";
     } else {
       alertText += " | 🍃 CASUAL PLAY";
     }
   }
 
-  // Isi narasi default jika tidak memicu crash warning
+  // Isi narasi default jika tidak memicu warning
   if (reasons.length === 0) {
     if (mood === 1) reasons.push(pickRandom(reasonPool.mood_low));
     if (mood === 3) reasons.push(pickRandom(reasonPool.mood_high));
     if (mood === 2) reasons.push(pickRandom(reasonPool.neutral));
-
     if (conditions.includes("work")) { reasons.push(pickRandom(reasonPool.work)); } else { reasons.push(pickRandom(reasonPool.chill)); }
     if (aktivitas >= 4) { reasons.push(pickRandom(reasonPool.high_act)); } else { reasons.push(pickRandom(reasonPool.low_act)); }
     reasons.push(pickRandom(reasonPool.closing));
   }
 
-  // 6. HITUNG URUTAN 7 HARI WEEKLY REKAP (Kalkulasi Akurat Lu)
+  // Rekap 7 Hari Weekly Sequence
   let weekly = [];
   for (let i = 0; i < 4; i++) { weekly.push(base); } 
   for (let i = 0; i < 3; i++) {
@@ -228,17 +271,14 @@ function generateEngine() {
   }
   let weeklyString = weekly.map(x => diffName[x-1]).join(", ");
 
-  // 7. CETAK HASIL AKHIR KE LAYOUT
+  // Render Data Akhir Ke Browser Screen
   document.getElementById("modeAlert").innerText = alertText;
   document.getElementById("dailyResult").innerText = "Daily: " + diffName[base-1];
   document.getElementById("monthlyStatus").innerText = monthlyText;
   document.getElementById("weeklyResult").innerText = "Weekly: " + weeklyString;
   document.getElementById("diffImage").src = diffImage[base];
-  
-  // FIXED REVISI ALASAN: (Menghilangkan dualisme kata skenario di bawah)
   document.getElementById("reasonText").innerText = reasons.join(". ") + `. (Dadu murni memilih Skenario: ${rolledScenario.toUpperCase()})`;
 
-  // Tampilkan Screen Hasil Akhir
   let resEL = document.getElementById("resultLayer");
   resEL.style.display = "block";
   setTimeout(() => { resEL.classList.add("active"); }, 10);

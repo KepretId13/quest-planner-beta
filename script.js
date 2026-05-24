@@ -299,3 +299,4 @@ function resetEngine() {
   document.getElementById("step1").style.display = "block";
   setTimeout(() => { document.getElementById("step1").classList.add("active"); }, 10);
     }
+

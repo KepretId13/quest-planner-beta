@@ -148,8 +148,23 @@ input[type="checkbox"] {
   color: #ffffff;
 }
 
+/* Kunci wadah gambarnya biar gak luber keluar kontainer */
 .img-wrapper {
-  margin: 15px 0;
+  margin: 20px auto;
+  max-width: 280px; /* Batas lebar maksimal gambar di HP */
+  width: 100%;       /* Biar ngikutin lebar layar secara fleksibel */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;  /* Amankan pinggiran gambar */
+}
+
+/* Paksa gambar kartu lu buat nyesuaiin wadahnya otomatis */
+#diffImage {
+  width: 100%;       /* Gambar otomatis menyusut sesuai wadah .img-wrapper */
+  height: auto;      /* Jaga rasio gambar biar gak gepeng */
+  border-radius: 8px;/* Bikin ujung kartu agak melengkung estetik */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Kasih efek bayangan tipis */
 }
 
 #reasonText {

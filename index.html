@@ -128,9 +128,18 @@
       <div class="img-wrapper">
         <img id="diffImage" src="" alt="Difficulty Status">
       </div>
-        <div class="durability-indicator">
-        ⚡ Stamina Durability: <span id="durabilityValue">0%</span>
-        </div>
+        <div class="durability-bar-wrapper">
+    <div class="bar-header-container">
+      <div class="durability-bar-text">🛡️ HP Durability Status:</div>
+      <div id="hpPopupContainer" class="popup-container"></div>
+    </div>
+    
+    <div class="ascii-bar-display">
+      <span id="liveAsciiBar">[##########]</span> 
+      <span id="liveDurabilityText">100%</span>
+      <span id="criticalBadge" class="critical-badge" style="display: none;">-CRITICAL</span>
+    </div>
+  </div>
       <p id="reasonText"></p>
       <div class="meta-status">
         <span id="monthlyStatus"></span>
